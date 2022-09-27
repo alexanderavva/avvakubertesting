@@ -1,0 +1,46 @@
+server:
+  port: 8081
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+#    driver-class-name: 'org.postgresql.Driver'
+#    url: jdbc:postgresql://10.159.214.68:5432/postgres?currentSchema=test
+#    username: postgres
+#    password: 1
+
+    #  MysqlStart
+   url: jdbc:mysql://localhost:3306/shop?characterEncoding=UTF-8
+   username: root
+   password: 1234
+
+  # Keep the connection alive if idle for a long time (needed in production)
+  testWhileIdle: true
+  validationQuery: SELECT 1
+
+  #  MysqlEnd
+---
+spring:
+  default-name: Alex
+
+app:
+  cron: '*/5 * * * * *'
+
+
+spring.security.user.name: admin
+spring.security.user.password: admin
+
+# App Properties
+bezkoder.app.jwtSecret: bezKoderSecretKey
+#bezkoder.app.jwtExpirationMs: 86400000
+bezkoder.app.jwtExpirationMs: 300000
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+    org.springframework.jdbc: trace

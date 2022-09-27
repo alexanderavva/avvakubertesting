@@ -1,0 +1,38 @@
+#read properties: http://localhost:5000/conf/demo/dev
+#refresh properties: POST http://localhost:3034/demo/actuator/refresh
+#--spring.profiles.active=dev / stage / prod
+
+server:
+  port: 6060
+  servlet:
+    contextPath: /cdpaudit
+
+spring:
+  application:
+    name: cdpaudit_cdpaudit
+  cloud:
+    config:
+      uri: http://app.cdp.local:5000/conf
+      fail-fast: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cdpaudit
+    username: cdpaudit
+    password: cdpaudit
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/liquibase-changelog.xml
+    user: cdpaudit
+    password: cdpaudit
+    url: jdbc:postgresql://localhost:5432/cdpaudit
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+
+filestore:
+  exclude: true
+
+logging:
+  level:
+    root: info
+    ru.reinform: error
+    ru.primegroup.audit: debug
